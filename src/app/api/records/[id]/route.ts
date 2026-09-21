@@ -3,9 +3,14 @@ import { db } from '@/lib/db';
 import { records } from '@/lib/db/schema';
 import { eq } from 'drizzle-orm';
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(
+  request: Request,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id: rawId } = await params;
+
   try {
-    const id = parseInt(params.id, 10);
+    const id = parseInt(rawId, 10);
     if (isNaN(id)) {
       return NextResponse.json({ error: 'Invalid ID' }, { status: 400 });
     }
@@ -18,7 +23,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
 
     return NextResponse.json(result[0]);
   } catch (error) {
-    console.error(`Error fetching record ${params.id}:`, error);
+    console.error(`Error fetching record ${rawId}:`, error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
 }
