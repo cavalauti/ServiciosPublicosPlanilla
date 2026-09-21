@@ -68,8 +68,8 @@ export default function HistorialPlanillas({ historial = [] }: Props) {
     });
 
     const workbook = XLSX.utils.book_new();
-    const worksheet = XLSX.utils.json_to_sheet(datosFilas, { origin: "A5" });
-
+    const worksheet = XLSX.utils.json_to_sheet(datosFilas, { origin: "A5" } as any);
+    
     XLSX.utils.sheet_add_aoa(worksheet, [
       ["PLANILLA DE CONTROL DE PLANTA POTABILIZADORA - HISTORIAL"],
       [`Fecha: ${registro.fecha}`, `Turno: ${registro.turno}`, `Operador: ${registro.operador}`],
