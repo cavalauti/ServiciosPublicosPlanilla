@@ -1,24 +1,7 @@
-# Dependencias (muy pesado, Vercel lo instala solo)
-node_modules/
+import type { NextConfig } from "next";
 
-# Archivos de compilación de Next.js
-.next/
-out/
-build/
-dist/
+const nextConfig: NextConfig = {
+  serverExternalPackages: ["better-sqlite3"],
+};
 
-# Logs de error
-*.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Archivos de entorno y bases de datos locales
-.env*.local
-.env
-sqlite
-*.db
-
-# macOS / Sistema
-.DS_Store
-Thumbs.db
+export default nextConfig;
