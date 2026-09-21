@@ -59,7 +59,7 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date');
 
-    let query = db.select().from(records).orderBy(sql`${records.timestamp} DESC`);
+    let query: any = db.select().from(records);
 
     if (date) {
       const filterDate = new Date(date);
